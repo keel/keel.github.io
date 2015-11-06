@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[keel]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="https://keel.github.io/"/>
+  <updated>2015-11-06T16:29:30.000Z</updated>
+  <id>https://keel.github.io/</id>
+  
+  <author>
+    <name><![CDATA[Keel]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[从hexo开始]]></title>
+    <link href="https://keel.github.io/2015/try-hexo/"/>
+    <id>https://keel.github.io/2015/try-hexo/</id>
+    <published>2015-11-06T16:16:21.000Z</published>
+    <updated>2015-11-06T16:29:30.000Z</updated>
+    <content type="html"><![CDATA[<p>还是纯静态站的构建,时隔这么久,没想到nodejs倒是出了一个不错的静态blog项目 – hexo ,想当初用freemarker+fmpp实现的纯静态blog终于有了升级之日了.哦,记得那一版还是2008年1月.</p>
+<p>就是喜欢nodejs简单,直接,纯粹.</p>
+<p>说实话,之前对node一直报以非常怀疑的态度,如果不是因为项目的性能问题实在搞不定了,可能会错过很长时间,谁知道一旦尝试,爱不释手了…</p>
+<p>就这样开始吧.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'hello hexo.'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>嗯,就这样.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>还是纯静态站的构建,时隔这么久,没想到nodejs倒是出了一个不错的静态blog项目 – hexo ,想当初用freemarker+fmpp实现的纯静态blog终于有了升级之日了.哦,记得那一版还是2008年1月.</p>
+<p>就是喜欢nodejs简单,直接,纯粹.</p]]>
+    </summary>
+    
+      <category term="hexo" scheme="https://keel.github.io/tags/hexo/"/>
+    
+      <category term="other" scheme="https://keel.github.io/categories/other/"/>
+    
+  </entry>
+  
+</feed>
