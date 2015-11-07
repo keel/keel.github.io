@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[在CentOS6中升级openSSH到6.7版]]></title>
-    <link href="https://keel.github.io/2015/update-openssh-6/"/>
-    <id>https://keel.github.io/2015/update-openssh-6/</id>
+    <link href="https://keel.github.io/y2015/update-openssh-6/"/>
+    <id>https://keel.github.io/y2015/update-openssh-6/</id>
     <published>2015-11-06T16:16:21.000Z</published>
     <updated>2015-11-07T07:57:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
@@ -66,8 +66,8 @@
   
   <entry>
     <title><![CDATA[从hexo开始]]></title>
-    <link href="https://keel.github.io/2015/try-hexo/"/>
-    <id>https://keel.github.io/2015/try-hexo/</id>
+    <link href="https://keel.github.io/y2015/try-hexo/"/>
+    <id>https://keel.github.io/y2015/try-hexo/</id>
     <published>2015-11-06T16:16:21.000Z</published>
     <updated>2015-11-06T18:07:38.000Z</updated>
     <content type="html"><![CDATA[<h1 id="回归">回归</h1><p>还是纯静态站的构建,时隔这么久,没想到nodejs倒是出了一个不错的静态blog项目 – hexo ,想当初用freemarker+fmpp实现的纯静态blog终于有了升级之日了.哦,记得那一版还是2008年1月.</p>
