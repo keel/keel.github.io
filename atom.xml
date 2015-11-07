@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="https://keel.github.io/"/>
-  <updated>2015-11-06T18:07:38.000Z</updated>
+  <updated>2015-11-07T07:57:36.000Z</updated>
   <id>https://keel.github.io/</id>
   
   <author>
@@ -13,6 +13,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[在CentOS6中升级openSSH到6.7版]]></title>
+    <link href="https://keel.github.io/2015/update-openssh-6/"/>
+    <id>https://keel.github.io/2015/update-openssh-6/</id>
+    <published>2015-11-06T16:16:21.000Z</published>
+    <updated>2015-11-07T07:57:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
+<blockquote>
+<p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
+</blockquote>
+<p>实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装了,而这一过程比较痛苦,因为是ssh,所以远程安装时必须先启用telnet备用,待补好后再关闭,事实证明这一步骤<strong>非常非常必要!</strong></p>
+<p>经过三四天的折腾,成功完成了20几台服务器的升级,在此记录下:</p>
+<a id="more"></a>
+<h1 id="使用yum安装需要的telnet服务以及编译openssh需要的库">使用yum安装需要的telnet服务以及编译openssh需要的库</h1><p>登录后先跳转root权限,执行以下命令:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> sshUpdate &amp;&amp; <span class="keyword">cd</span> sshUpdate \</span><br><span class="line">&amp;&amp; yum install -<span class="keyword">y</span> xinetd telnet-server <span class="keyword">make</span> <span class="keyword">perl</span> pam pam-devel zlib zlib-devel openssl-devel \</span><br><span class="line">&amp;&amp; yum install -<span class="keyword">y</span> gcc* \</span><br><span class="line">&amp;&amp; <span class="keyword">vim</span> /etc/xinetd.<span class="keyword">d</span>/telnet</span><br></pre></td></tr></table></figure>
+<p>在这里将/etc/xinetd.d/telnet(这里telnet文件名也有可能为krb5-telnet) 中的disable=yes改为no,保存退出.</p>
+<h1 id="启动telnet服务">启动telnet服务</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/xinetd restart &amp;&amp; vim /</span>etc<span class="regexp">/sysconfig/i</span>ptables</span><br></pre></td></tr></table></figure>
+<p>启动telnet服务并编辑iptables打开23端口,也就是telnet端口,打开后重启iptables</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">service</span> iptables restart</span><br></pre></td></tr></table></figure>
+<p>此时,应该可以另开一个terminal使用telnet <ip>方式尝试登录服务器了,如果有问题,需要检查上述步骤是否有误,特别要注意23端口除了iptables限制外,还有没有上层的路由或者云主机的管理系统没有打开.</ip></p>
+<h1 id="下载并编译安装openssh6-7p1">下载并编译安装openssh6.7p1</h1><p>这里推荐先用yum update openssl将openssl升级,至少是1.0.1版本.<br>执行以下命令:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~<span class="regexp">/sshUpdate \</span><br><span class="line">&amp;&amp; wget http:/</span><span class="regexp">/ftp.openbsd.org/</span>pub<span class="regexp">/OpenBSD/</span>OpenSSH<span class="regexp">/portable/</span>openssh-<span class="number">6.7</span>p1.tar.gz &amp;&amp; mv <span class="regexp">/etc/</span>ssh <span class="regexp">/etc/</span>ssh.bak \</span><br><span class="line">&amp;&amp; rpm -e `rpm -qa | <span class="keyword">grep</span> openssh` --nodeps \</span><br><span class="line">&amp;&amp; tar zxf openssh-<span class="number">6.7</span>p1.tar.gz &amp;&amp; cd openssh-<span class="number">6.7</span>p1 \</span><br><span class="line">&amp;&amp; .<span class="regexp">/configure --prefix=/u</span>sr --sysconfdir=<span class="regexp">/etc/</span>ssh --with-pam --with-zlib --with-md5-passwords \</span><br><span class="line">&amp;&amp; make &amp;&amp; make install \</span><br><span class="line">&amp;&amp; ssh -V</span><br></pre></td></tr></table></figure>
+<p>以上指令会先下载6.7的源码,然后备份ssh并卸载当前的openssh,随后将源码进行编译,这里如果执行出错,请检查第一步的相关依赖包没有通过yum安装完整,如果没有,建议更换yum源,比如用阿里的源.<br>最后一句会显示当前ssh的版本号,如果成功显示openSSH6.7p1,那基本上算是接近成功了.</p>
+<h1 id="启用ssh服务">启用ssh服务</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp contrib<span class="regexp">/redhat/</span>sshd.init <span class="regexp">/etc/i</span>nit.d<span class="regexp">/sshd &amp;&amp; chkconfig --add sshd \</span><br><span class="line">&amp;&amp; service sshd start &amp;&amp; vim /</span>etc<span class="regexp">/ssh/</span>sshd_config</span><br></pre></td></tr></table></figure>
+<p>这里将ssh服务做成开机启动并启动了sshd,打开sshd_config后,如果需要连接xshell4,则按下图进行以下修改:<br><img src="/images/openssh_sshd_config.jpg" alt="sshd"><br>保存退出后,重启sshd并查一下sshd服务是否是自启动状态:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart &amp;&amp; chkconfig <span class="comment">--list sshd</span></span><br></pre></td></tr></table></figure>
+<h1 id="关闭telnet">关闭telnet</h1><p>停止telnet服务,并修改配置:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/xinetd stop &amp;&amp; vi /</span>etc<span class="regexp">/xinetd.d/</span>telnet</span><br></pre></td></tr></table></figure>
+<p>将之前改过的disable=yes又改回去成no.<br>随后再将修改iptables将23端口关闭,并重启iptables服务.<br>至此,可以再开ssh登录,用ssh -V查看版本号.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
+<blockquote>
+<p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
+</blockquote>
+<p>实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装了,而这一过程比较痛苦,因为是ssh,所以远程安装时必须先启用telnet备用,待补好后再关闭,事实证明这一步骤<strong>非常非常必要!</strong></p>
+<p>经过三四天的折腾,成功完成了20几台服务器的升级,在此记录下:</p>]]>
+    
+    </summary>
+    
+      <category term="centos" scheme="https://keel.github.io/tags/centos/"/>
+    
+      <category term="linux" scheme="https://keel.github.io/tags/linux/"/>
+    
+      <category term="ssh" scheme="https://keel.github.io/tags/ssh/"/>
+    
+      <category term="linux" scheme="https://keel.github.io/categories/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[从hexo开始]]></title>

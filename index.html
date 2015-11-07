@@ -233,6 +233,107 @@
             
               
                 
+                <a class="post-title-link" href="/2015/update-openssh-6/" itemprop="url">
+                  在CentOS6中升级openSSH到6.7版
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-07T00:16:21+08:00" content="2015-11-07">
+              2015-11-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
+<blockquote>
+<p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
+</blockquote>
+<p>实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装了,而这一过程比较痛苦,因为是ssh,所以远程安装时必须先启用telnet备用,待补好后再关闭,事实证明这一步骤<strong>非常非常必要!</strong></p>
+<p>经过三四天的折腾,成功完成了20几台服务器的升级,在此记录下:</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/update-openssh-6/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/try-hexo/" itemprop="url">
                   从hexo开始
                 </a>
@@ -353,21 +454,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
