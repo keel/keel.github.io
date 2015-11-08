@@ -29,13 +29,13 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="keel,k99k,nodejs,express" />
+  <meta name="keywords" content="keel,踩坑道人,k99k,nodejs" />
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Keel's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="踩坑道人" type="application/atom+xml" />
 
 
 
@@ -49,12 +49,12 @@
 
 <meta name="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Keel's Blog">
+<meta property="og:title" content="踩坑道人">
 <meta property="og:url" content="https://keel.github.io/index.html">
-<meta property="og:site_name" content="Keel's Blog">
+<meta property="og:site_name" content="踩坑道人">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Keel's Blog">
+<meta name="twitter:title" content="踩坑道人">
 <meta name="twitter:description">
 
 
@@ -67,7 +67,7 @@
   };
 </script>
 
-  <title> Keel's Blog </title>
+  <title> 踩坑道人 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -100,7 +100,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Keel's Blog</span>
+      <span class="site-title">踩坑道人</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -215,6 +215,120 @@
             
               
                 
+                <a class="post-title-link" href="/2015/hexo-ftpsync-bug/" itemprop="url">
+                  坑001:Hexo的配置和ftpsync插件的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-08T15:15:00+08:00" content="2015-11-08">
+              2015-11-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/hexo-ftpsync-bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/hexo-ftpsync-bug/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="缘起">缘起</h1><p>入Hexo之门才一天,这就踩坑了! 正是应了”凡悟道,必踩坑”之理.</p>
+<h1 id="小坑">小坑</h1><p>先说说头一天踩的小坑吧:</p>
+<ol>
+<li><p>_config.yml中的配置,这个配置文件对于字段键值的空白是尤其讲究啊!键名的冒号后面必须跟一个空格才还跟键值,否则报错.<br>如: <code>language:zh-Hans</code>错误, <code>language: zh-Hans</code>正确. 另外键名之前的空格也必须对齐,否则也报错!如:</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上错误,</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上正确.总之,这个yml文件特别地敏感脆弱,就不要欺负她了.</p>
+</li>
+<li>hexo配置在项目根目录下的_config.yml文件中,但别忘记了主题里面还有个配置是在thems/themName/_config.yml,这里可控制主题和显示相关的配置,嗯,是的,她们都一样敏感脆弱.</li>
+<li>关于主题,这里注意有的主题会引入外部的字体之类,这些资源会拖慢整个页面的响应,建议找出他们并去除掉,另外配置里面一些默认为true的项目也看下是还真的需要,如果不需要还请关闭了.</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/hexo-ftpsync-bug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/update-openssh-6/" itemprop="url">
                   在CentOS6中升级openSSH到6.7版
                 </a>
@@ -226,8 +340,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-07T00:16:21+08:00" content="2015-11-07">
-              2015-11-07
+            <time itemprop="dateCreated" datetime="2015-11-08T09:16:21+08:00" content="2015-11-08">
+              2015-11-08
             </time>
           </span>
 
@@ -249,6 +363,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/update-openssh-6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/update-openssh-6/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -351,6 +472,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/try-hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/try-hexo/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -436,21 +564,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -526,11 +654,28 @@
 
   
     
-    
 
   
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"keel"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
 
 
+    
   
 
   

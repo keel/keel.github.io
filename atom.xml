@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[Keel's Blog]]></title>
+  <title><![CDATA[踩坑道人]]></title>
   
   <link href="/atom.xml" rel="self"/>
   <link href="https://keel.github.io/"/>
-  <updated>2015-11-07T07:57:36.000Z</updated>
+  <updated>2015-11-08T17:48:24.000Z</updated>
   <id>https://keel.github.io/</id>
   
   <author>
@@ -15,11 +15,75 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[坑001:Hexo的配置和ftpsync插件的坑]]></title>
+    <link href="https://keel.github.io/2015/hexo-ftpsync-bug/"/>
+    <id>https://keel.github.io/2015/hexo-ftpsync-bug/</id>
+    <published>2015-11-08T07:15:00.000Z</published>
+    <updated>2015-11-08T17:48:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="缘起">缘起</h1><p>入Hexo之门才一天,这就踩坑了! 正是应了”凡悟道,必踩坑”之理.</p>
+<h1 id="小坑">小坑</h1><p>先说说头一天踩的小坑吧:</p>
+<ol>
+<li><p>_config.yml中的配置,这个配置文件对于字段键值的空白是尤其讲究啊!键名的冒号后面必须跟一个空格才还跟键值,否则报错.<br>如: <code>language:zh-Hans</code>错误, <code>language: zh-Hans</code>正确. 另外键名之前的空格也必须对齐,否则也报错!如:</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上错误,</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上正确.总之,这个yml文件特别地敏感脆弱,就不要欺负她了.</p>
+</li>
+<li>hexo配置在项目根目录下的_config.yml文件中,但别忘记了主题里面还有个配置是在thems/themName/_config.yml,这里可控制主题和显示相关的配置,嗯,是的,她们都一样敏感脆弱.</li>
+<li>关于主题,这里注意有的主题会引入外部的字体之类,这些资源会拖慢整个页面的响应,建议找出他们并去除掉,另外配置里面一些默认为true的项目也看下是还真的需要,如果不需要还请关闭了.</li>
+</ol>
+<a id="more"></a>
+<h1 id="大坑">大坑</h1><p>ftpsync,这个必须是叫大坑了!</p>
+<ol>
+<li><p>插件看上去特别”简单”,但工作原理肯定与你想的不一样,它是直接的”同步”吧,是把ftp的服务端目录调整成本地目录一模一样,也就是你原来服务器上的文件如果本地没有话是会被<strong>删除</strong>,<strong>删除</strong>,<strong>删除</strong>(重要的事说三遍)掉的!而不是一般deploy只负责上传的理解.因为下面的又一大坑,我去查了hexo-deploy-ftpsync插件,它使用的是<a href="https://github.com/evanplaice/node-ftpsync" target="_blank" rel="external">node-ftpsync</a>,人家的说明里明确说了:</p>
+<blockquote>
+<p>This is not ftp-deploy. This application will delete files and directories on the remote server to match the local machine. Use this application in production at your own risk.</p>
+</blockquote>
+<p>好吧,我这下损失大了,服务器的文件还不知道去哪里找…</p>
+</li>
+<li><p>好吧,那我配置ignore总可以避免服务端文件被删除吧,但这个ignore简单的配置一个目录名居然不生效?那到底如何配置呢?经过多方试验,发现这里必须按如下配置:</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">port: 21</span><br><span class="line">ignore: ['dir1','.DS_Store','file1.htm']</span><br></pre></td></tr></table></figure>
+<p>注意中括号不可少.</p>
+</li>
+<li>下面是最大的坑了,话说最坑的必然留到最后…<br>配置好后,执行一次<code>hexo g -d</code>,好,成功生成并上传了! 慢着,趁兴致我再来个小改或者再写篇美文post一下吧,好,再次<code>hexo g -d</code>,咦?怎么报错了?<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Error: <span class="number">550</span> ./wwwroot/<span class="number">2015</span>: Cannot create <span class="tag">a</span> file when that file already exists.</span><br><span class="line">    at Ftp<span class="class">.parse</span> (/Users/keel/dev/hexo/node_modules/jsftp/lib/jsftp<span class="class">.js</span>:<span class="number">257</span>:<span class="number">11</span>)</span><br><span class="line">    at Ftp<span class="class">.parseResponse</span> (/Users/keel/dev/hexo/node_modules/jsftp/lib/jsftp<span class="class">.js</span>:<span class="number">174</span>:<span class="number">8</span>)</span><br><span class="line">    at Stream.&lt;anonymous&gt; (/Users/keel/dev/hexo/node_modules/jsftp/lib/jsftp<span class="class">.js</span>:<span class="number">146</span>:<span class="number">24</span>)</span><br><span class="line">    at emitOne (events<span class="class">.js</span>:<span class="number">77</span>:<span class="number">13</span>)</span><br><span class="line">    at Stream<span class="class">.emit</span> (events<span class="class">.js</span>:<span class="number">169</span>:<span class="number">7</span>)</span><br><span class="line">    at ResponseParser<span class="class">.reemit</span> (/Users/keel/dev/hexo/node_modules/duplexer/index<span class="class">.js</span>:<span class="number">70</span>:<span class="number">25</span>)</span><br><span class="line">    at emitOne (events<span class="class">.js</span>:<span class="number">77</span>:<span class="number">13</span>)</span><br><span class="line">    at ResponseParser<span class="class">.emit</span> (events<span class="class">.js</span>:<span class="number">169</span>:<span class="number">7</span>)</span><br><span class="line">    at readableAddChunk (_stream_readable<span class="class">.js</span>:<span class="number">146</span>:<span class="number">16</span>)</span><br><span class="line">    at ResponseParser<span class="class">.Readable</span><span class="class">.push</span> (_stream_readable<span class="class">.js</span>:<span class="number">110</span>:<span class="number">10</span>)</span><br><span class="line">    at ResponseParser<span class="class">.Transform</span><span class="class">.push</span> (_stream_transform<span class="class">.js</span>:<span class="number">128</span>:<span class="number">32</span>)</span><br><span class="line">    at ResponseParser.&lt;anonymous&gt; (/Users/keel/dev/hexo/node_modules/ftp-response-parser/index<span class="class">.js</span>:<span class="number">65</span>:<span class="number">12</span>)</span><br><span class="line">    at Array<span class="class">.forEach</span> (native)</span><br><span class="line">    at ResponseParser._transform (/Users/keel/dev/hexo/node_modules/ftp-response-parser/index<span class="class">.js</span>:<span class="number">48</span>:<span class="number">9</span>)</span><br><span class="line">    at ResponseParser<span class="class">.Transform</span>._read (_stream_transform<span class="class">.js</span>:<span class="number">167</span>:<span class="number">10</span>)</span><br><span class="line">    at ResponseParser<span class="class">.Transform</span>._write (_stream_transform<span class="class">.js</span>:<span class="number">155</span>:<span class="number">12</span>)</span><br><span class="line">    at doWrite (_stream_writable<span class="class">.js</span>:<span class="number">292</span>:<span class="number">12</span>)</span><br><span class="line">    at writeOrBuffer (_stream_writable<span class="class">.js</span>:<span class="number">278</span>:<span class="number">5</span>)</span><br><span class="line">    at ResponseParser<span class="class">.Writable</span><span class="class">.write</span> (_stream_writable<span class="class">.js</span>:<span class="number">207</span>:<span class="number">11</span>)</span><br><span class="line">    at Socket<span class="class">.ondata</span> (_stream_readable<span class="class">.js</span>:<span class="number">528</span>:<span class="number">20</span>)</span><br><span class="line">    at emitOne (events<span class="class">.js</span>:<span class="number">77</span>:<span class="number">13</span>)</span><br><span class="line">    at Socket<span class="class">.emit</span> (events<span class="class">.js</span>:<span class="number">169</span>:<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>嗯,难道是心神不聚所致? 此时凝神自省半分钟,这次集中精神,再出手!还是报错!</p>
+<p>好吧,看错误应该是远端的目录已经存在了无法再创建,把那个verbose打开看log吧,果然够verbose,输出了一大版,仔细看了好多次,又尝试了好多次,终于看出门道了,这货是先将远端的目录文件与本地的目录文件对比,然后将差异计算出来,执行相关的同步操作的,但是remote部分列出的目录却不对啊,本来远端有个2015的目录,但remote只有一个5的目录,所以计算的差异部分是要再次创建这个2015的目录,但远端已经有了,所以失败.那根源在获取remote目录列表上了?</p>
+<p>这是个大麻烦,很可能是个bug了,二话不说,先祭个寻字符吧,google,baidu,github狂搜一通,居然无解?那再祭起请神符,各论坛发问不提,还在github上提了相关的issue.</p>
+<p>本想着就此等结果了,但身为踩坑道人,为平坑劫,求人先求已,心想nodejs有个好处,这些modules实际上是在自己手上,不像jar包没法动手脚,它是可以就着log追过去尝试寻下报错的根源,这个hexo-deploy-ftpsync是依赖于node-ftpsync的,而它是依赖于jsftp的,在node_modules里面找到jsftp猛下一顿console.log,尝试看下问题…历经3小时后…终于摸清了jsftp的ftp请求发送与接受处理流程,看来问题在接收上,jsftp还依赖一个作者的parse-listing项目,这个项目里对ftp返回内容做了解析,而这个解析是一个正则,经过验证,当目录为<strong><em>纯数字</em></strong>时,它会以为这是一个文件的大小,把它视作文件处理!好吧,本道可以填坑了,填好后,mocha一下,没问题,再hexo g -d,也没问题了,为了结个好的因果,特地fork了作者的项目,并<a href="https://github.com/keel/parse-listing/commit/0b130bc927afec17c593f5b276a434d0a11e6e68" target="_blank" rel="external">pull request</a>,再对之前提的各个issue(是的,从hexo开始到jsftp所有依赖的项目里我都提了issue),做了补完.</p>
+<p>至此,心愿已了,虽然费时甚多,但有了善果,可以愉快的睡了.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="缘起">缘起</h1><p>入Hexo之门才一天,这就踩坑了! 正是应了”凡悟道,必踩坑”之理.</p>
+<h1 id="小坑">小坑</h1><p>先说说头一天踩的小坑吧:</p>
+<ol>
+<li><p>_config.yml中的配置,这个配置文件对于字段键值的空白是尤其讲究啊!键名的冒号后面必须跟一个空格才还跟键值,否则报错.<br>如: <code>language:zh-Hans</code>错误, <code>language: zh-Hans</code>正确. 另外键名之前的空格也必须对齐,否则也报错!如:</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上错误,</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<p>以上正确.总之,这个yml文件特别地敏感脆弱,就不要欺负她了.</p>
+</li>
+<li>hexo配置在项目根目录下的_config.yml文件中,但别忘记了主题里面还有个配置是在thems/themName/_config.yml,这里可控制主题和显示相关的配置,嗯,是的,她们都一样敏感脆弱.</li>
+<li>关于主题,这里注意有的主题会引入外部的字体之类,这些资源会拖慢整个页面的响应,建议找出他们并去除掉,另外配置里面一些默认为true的项目也看下是还真的需要,如果不需要还请关闭了.</li>
+</ol>]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="https://keel.github.io/tags/hexo/"/>
+    
+      <category term="nodejs" scheme="https://keel.github.io/tags/nodejs/"/>
+    
+      <category term="nodejs" scheme="https://keel.github.io/categories/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[在CentOS6中升级openSSH到6.7版]]></title>
     <link href="https://keel.github.io/2015/update-openssh-6/"/>
     <id>https://keel.github.io/2015/update-openssh-6/</id>
-    <published>2015-11-06T16:16:21.000Z</published>
-    <updated>2015-11-07T07:57:36.000Z</updated>
+    <published>2015-11-08T01:16:21.000Z</published>
+    <updated>2015-11-08T16:14:07.000Z</updated>
     <content type="html"><![CDATA[<h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
 <blockquote>
 <p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
