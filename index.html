@@ -280,10 +280,10 @@
  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
 <p>以上错误,</p>
  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
-<p>以上正确.总之,这个yml文件特别地敏感脆弱,就不要欺负她了.</p>
+<p>以上正确.<br>总之,这个yml文件特别地敏感脆弱,就不要欺负她了.</p>
 </li>
 <li>hexo配置在项目根目录下的_config.yml文件中,但别忘记了主题里面还有个配置是在thems/themName/_config.yml,这里可控制主题和显示相关的配置,嗯,是的,她们都一样敏感脆弱.</li>
-<li>关于主题,这里注意有的主题会引入外部的字体之类,这些资源会拖慢整个页面的响应,建议找出他们并去除掉,另外配置里面一些默认为true的项目也看下是还真的需要,如果不需要还请关闭了.</li>
+<li>关于主题,这里注意有的主题会引入外部的字体之类,这些资源会拖慢整个页面的响应,建议找出他们并去除掉,另外配置里面一些默认为true的项目也看下是否真的需要,不需要就关掉.</li>
 </ol>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/hexo-ftpsync-bug/#more" rel="contents">
