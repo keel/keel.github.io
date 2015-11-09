@@ -215,6 +215,114 @@
             
               
                 
+                <a class="post-title-link" href="/2015/github-multiple-ssh-key/" itemprop="url">
+                  坑002:在mac上使用不同的ssh key访问不同的git服务端
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-09T22:15:00+08:00" content="2015-11-09">
+              2015-11-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/github-multiple-ssh-key/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/github-multiple-ssh-key/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="缘起">缘起</h1><p>一个ssh key绑定了一个github账号之后,无法再次绑定到另一个github账号,但现在需要在同一台mac上访问两个github账号下的repo,比如说一个私人的,一个工作的,怎么办?</p>
+<h1 id="填坑">填坑</h1><p>此坑本道祭了道 <strong>“寻龙符”</strong> 搞定! 也就是google了一下,嘿嘿,现总结如下:</p>
+<h2 id="总体思路:">总体思路:</h2><ol>
+<li>如果需要访问两个不同的github账号的repo,则需要两个ssh key分别绑定到这两个github账号上.</li>
+<li>需要调整ssh配置和本地git项目的remote配置,使之分别对应到不同的ssh key上去.</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/github-multiple-ssh-key/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/hexo-ftpsync-bug/" itemprop="url">
                   坑001:Hexo的配置和ftpsync插件的坑
                 </a>
@@ -564,21 +672,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
