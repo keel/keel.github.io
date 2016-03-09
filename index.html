@@ -215,6 +215,114 @@
             
               
                 
+                <a class="post-title-link" href="/2015/nodejs-trap/" itemprop="url">
+                  坑003:也谈node.js开发中的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-09T21:12:00+08:00" content="2015-12-09">
+              2015-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/nodejs-trap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/nodejs-trap/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="缘起">缘起</h1><p>node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.</p>
+<h1 id="继承于javascript的坑">继承于javascript的坑</h1><h2 id="弱类型">弱类型</h2><ol>
+<li>判断对象是否不存在使用if(!obj), 此时如果obj为<code>&#39;&#39;</code> 或 <code>0</code> 或 <code>false</code>,也会误认为不存在;</li>
+<li>字符串连接,一般会自动转成string, 但不巧如果头两个正好可以转数字,那么它会按数字相加.如:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,b = <span class="string">'b'</span>,c = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> s1 = a + c + b;</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">''</span> + a + c + b;</span><br><span class="line"><span class="built_in">console</span>.log(s1); <span class="comment">//"11b"</span></span><br><span class="line"><span class="built_in">console</span>.log(s2); <span class="comment">//"110b"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/nodejs-trap/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/github-multiple-ssh-key/" itemprop="url">
                   坑002:在mac上使用不同的ssh key访问不同的git服务端
                 </a>
@@ -672,21 +780,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -729,7 +837,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
