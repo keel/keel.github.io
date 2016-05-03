@@ -115,9 +115,9 @@
       <category term="git" scheme="https://keel.github.io/categories/git/"/>
     
     
-      <category term="ssh" scheme="https://keel.github.io/tags/ssh/"/>
-    
       <category term="github" scheme="https://keel.github.io/tags/github/"/>
+    
+      <category term="ssh" scheme="https://keel.github.io/tags/ssh/"/>
     
       <category term="git" scheme="https://keel.github.io/tags/git/"/>
     
@@ -245,9 +245,9 @@
       <category term="linux" scheme="https://keel.github.io/categories/linux/"/>
     
     
-      <category term="centos" scheme="https://keel.github.io/tags/centos/"/>
-    
       <category term="ssh" scheme="https://keel.github.io/tags/ssh/"/>
+    
+      <category term="centos" scheme="https://keel.github.io/tags/centos/"/>
     
       <category term="linux" scheme="https://keel.github.io/tags/linux/"/>
     
