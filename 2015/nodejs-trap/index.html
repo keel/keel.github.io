@@ -59,7 +59,7 @@
 继承于javascript的坑弱类型
 判断对象是否不存在使用if(!obj), 此时如果obj为&amp;#39;&amp;#39; 或 0 或 false,也会误认为不存在;
 字符串连接,一般会自动转成string, 但不巧如果头两个正好可以转数字,那么它会按数字相加.如:12345var a = 1,b =">
-<meta property="og:updated_time" content="2015-12-19T13:36:23.000Z">
+<meta property="og:updated_time" content="2016-05-03T14:01:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="坑003:也谈node.js开发中的坑">
 <meta name="twitter:description" content="缘起node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.
@@ -270,11 +270,14 @@
 </ol>
 <a id="more"></a>
 <h1 id="node专属坑">node专属坑</h1><h2 id="异步处理">异步处理</h2><ol>
-<li>error处理忘记return</li>
-<li>循环中嵌套异步方法</li>
-<li>多重callback,一个方法中可能多次触发callback<h2 id="http">http</h2></li>
+<li>error处理忘记return.</li>
+<li>循环中嵌套异步方法,如果循环次数不多,可使用递归的方式解决.</li>
+<li>一个异步方法中处理不当有可能会多次触发callback,又或者是一个callback都没触发,需要仔细处理逻辑流程.<h2 id="http">http</h2></li>
 <li>request结束的event</li>
-<li>注意请求处理类型,有时候get和post方式不对,则请求看上去没有处理<h2 id="错误堆栈">错误堆栈</h2></li>
+<li>注意请求处理类型,有时候get和post方式不对,则请求看上去没有处理</li>
+<li>做proxy转发的时候注意http的head部分,请把host填对了再转<br>4.<h2 id="错误堆栈">错误堆栈</h2></li>
+<li>node的错误堆栈有时根本看不出问题在哪,最好是自己来包装和抛出有用的错误信息,为此我写了vlog模块.<h2 id="其他">其他</h2></li>
+<li>随时添加吧…</li>
 </ol>
 </span>
       
@@ -426,7 +429,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘起"><span class="nav-number">1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继承于javascript的坑"><span class="nav-number">2.</span> <span class="nav-text">继承于javascript的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#弱类型"><span class="nav-number">2.1.</span> <span class="nav-text">弱类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node专属坑"><span class="nav-number">3.</span> <span class="nav-text">node专属坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步处理"><span class="nav-number">3.1.</span> <span class="nav-text">异步处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http"><span class="nav-number">3.2.</span> <span class="nav-text">http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈"><span class="nav-number">3.3.</span> <span class="nav-text">错误堆栈</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘起"><span class="nav-number">1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继承于javascript的坑"><span class="nav-number">2.</span> <span class="nav-text">继承于javascript的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#弱类型"><span class="nav-number">2.1.</span> <span class="nav-text">弱类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node专属坑"><span class="nav-number">3.</span> <span class="nav-text">node专属坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步处理"><span class="nav-number">3.1.</span> <span class="nav-text">异步处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http"><span class="nav-number">3.2.</span> <span class="nav-text">http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误堆栈"><span class="nav-number">3.3.</span> <span class="nav-text">错误堆栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
