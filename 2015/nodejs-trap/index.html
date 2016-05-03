@@ -29,7 +29,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript,node," />
+  <meta name="keywords" content="node,javascript," />
 
 
 
@@ -262,21 +262,21 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="缘起">缘起</h1><p>node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.</p>
-<h1 id="继承于javascript的坑">继承于javascript的坑</h1><h2 id="弱类型">弱类型</h2><ol>
+        <span itemprop="articleBody"><h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.</p>
+<h1 id="继承于javascript的坑"><a href="#继承于javascript的坑" class="headerlink" title="继承于javascript的坑"></a>继承于javascript的坑</h1><h2 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h2><ol>
 <li>判断对象是否不存在使用if(!obj), 此时如果obj为<code>&#39;&#39;</code> 或 <code>0</code> 或 <code>false</code>,也会误认为不存在;</li>
 <li>字符串连接,一般会自动转成string, 但不巧如果头两个正好可以转数字,那么它会按数字相加.如:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,b = <span class="string">'b'</span>,c = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> s1 = a + c + b;</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">''</span> + a + c + b;</span><br><span class="line"><span class="built_in">console</span>.log(s1); <span class="comment">//"11b"</span></span><br><span class="line"><span class="built_in">console</span>.log(s2); <span class="comment">//"110b"</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <a id="more"></a>
-<h1 id="node专属坑">node专属坑</h1><h2 id="异步处理">异步处理</h2><ol>
+<h1 id="node专属坑"><a href="#node专属坑" class="headerlink" title="node专属坑"></a>node专属坑</h1><h2 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h2><ol>
 <li>error处理忘记return.</li>
 <li>循环中嵌套异步方法,如果循环次数不多,可使用递归的方式解决.</li>
-<li>一个异步方法中处理不当有可能会多次触发callback,又或者是一个callback都没触发,需要仔细处理逻辑流程.<h2 id="http">http</h2></li>
+<li>一个异步方法中处理不当有可能会多次触发callback,又或者是一个callback都没触发,需要仔细处理逻辑流程.<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2></li>
 <li>request结束的event</li>
 <li>注意请求处理类型,有时候get和post方式不对,则请求看上去没有处理</li>
-<li>做proxy转发的时候注意http的head部分,请把host填对了再转<br>4.<h2 id="错误堆栈">错误堆栈</h2></li>
-<li>node的错误堆栈有时根本看不出问题在哪,最好是自己来包装和抛出有用的错误信息,为此我写了vlog模块.<h2 id="其他">其他</h2></li>
+<li>做proxy转发的时候注意http的head部分,请把host填对了再转<br>4.<h2 id="错误堆栈"><a href="#错误堆栈" class="headerlink" title="错误堆栈"></a>错误堆栈</h2></li>
+<li>node的错误堆栈有时根本看不出问题在哪,最好是自己来包装和抛出有用的错误信息,为此我写了vlog模块.<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2></li>
 <li>随时添加吧…</li>
 </ol>
 </span>
@@ -287,9 +287,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag">#javascript</a>
-          
             <a href="/tags/node/" rel="tag">#node</a>
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
         </div>
       

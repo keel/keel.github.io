@@ -183,15 +183,6 @@
 
     
     
-      
-      
-        
-        
-        
-      
-
-      
-    
 
     
       
@@ -273,8 +264,8 @@
 
       
         
-          <h1 id="缘起">缘起</h1><p>node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.</p>
-<h1 id="继承于javascript的坑">继承于javascript的坑</h1><h2 id="弱类型">弱类型</h2><ol>
+          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>node.js因为javascript的缘故,存在各种大大小小的坑,尽管各种注意,仍然免不了中招.</p>
+<h1 id="继承于javascript的坑"><a href="#继承于javascript的坑" class="headerlink" title="继承于javascript的坑"></a>继承于javascript的坑</h1><h2 id="弱类型"><a href="#弱类型" class="headerlink" title="弱类型"></a>弱类型</h2><ol>
 <li>判断对象是否不存在使用if(!obj), 此时如果obj为<code>&#39;&#39;</code> 或 <code>0</code> 或 <code>false</code>,也会误认为不存在;</li>
 <li>字符串连接,一般会自动转成string, 但不巧如果头两个正好可以转数字,那么它会按数字相加.如:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>,b = <span class="string">'b'</span>,c = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> s1 = a + c + b;</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">''</span> + a + c + b;</span><br><span class="line"><span class="built_in">console</span>.log(s1); <span class="comment">//"11b"</span></span><br><span class="line"><span class="built_in">console</span>.log(s2); <span class="comment">//"110b"</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -381,9 +372,9 @@
 
       
         
-          <h1 id="缘起">缘起</h1><p>一个ssh key绑定了一个github账号之后,无法再次绑定到另一个github账号,但现在需要在同一台mac上访问两个github账号下的repo,比如说一个私人的,一个工作的,怎么办?</p>
-<h1 id="填坑">填坑</h1><p>此坑本道祭了道 <strong>“寻龙符”</strong> 搞定! 也就是google了一下,嘿嘿,现总结如下:</p>
-<h2 id="总体思路:">总体思路:</h2><ol>
+          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>一个ssh key绑定了一个github账号之后,无法再次绑定到另一个github账号,但现在需要在同一台mac上访问两个github账号下的repo,比如说一个私人的,一个工作的,怎么办?</p>
+<h1 id="填坑"><a href="#填坑" class="headerlink" title="填坑"></a>填坑</h1><p>此坑本道祭了道 <strong>“寻龙符”</strong> 搞定! 也就是google了一下,嘿嘿,现总结如下:</p>
+<h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路:"></a>总体思路:</h2><ol>
 <li>如果需要访问两个不同的github账号的repo,则需要两个ssh key分别绑定到这两个github账号上.</li>
 <li>需要调整ssh配置和本地git项目的remote配置,使之分别对应到不同的ssh key上去.</li>
 </ol>
@@ -489,8 +480,8 @@
 
       
         
-          <h1 id="缘起">缘起</h1><p>入Hexo之门才一天,这就踩坑了! 正是应了”凡悟道,必踩坑”之理.</p>
-<h1 id="小坑">小坑</h1><p>先说说头一天踩的小坑吧:</p>
+          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>入Hexo之门才一天,这就踩坑了! 正是应了”凡悟道,必踩坑”之理.</p>
+<h1 id="小坑"><a href="#小坑" class="headerlink" title="小坑"></a>小坑</h1><p>先说说头一天踩的小坑吧:</p>
 <ol>
 <li><p>_config.yml中的配置,这个配置文件对于字段键值的空白是尤其讲究啊!键名的冒号后面必须跟一个空格才还跟键值,否则报错.<br>如: <code>language:zh-Hans</code>错误, <code>language: zh-Hans</code>正确. 另外键名之前的空格也必须对齐,否则也报错!如:</p>
  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">  repo: https://github.com/xyz/xyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
@@ -603,7 +594,7 @@
 
       
         
-          <h1 id="缘起">缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
+          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
 <blockquote>
 <p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
 </blockquote>
@@ -711,7 +702,7 @@
 
       
         
-          <h1 id="回归">回归</h1><p>还是纯静态站的构建,时隔这么久,没想到nodejs倒是出了一个不错的静态blog项目 – hexo ,想当初用freemarker+fmpp实现的纯静态blog终于有了升级之日了.哦,记得那一版还是2008年1月.</p>
+          <h1 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h1><p>还是纯静态站的构建,时隔这么久,没想到nodejs倒是出了一个不错的静态blog项目 – hexo ,想当初用freemarker+fmpp实现的纯静态blog终于有了升级之日了.哦,记得那一版还是2008年1月.</p>
 <p>就是喜欢nodejs简单,直接,纯粹.</p>
 <p>说实话,之前对node一直报以非常怀疑的态度,如果不是因为项目的性能问题实在搞不定了,可能会错过很长时间,谁知道一旦尝试,爱不释手了…</p>
 <p>就这样开始吧.<br>
