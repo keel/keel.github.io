@@ -1,9 +1,20 @@
-<!doctype html>
-<html class="theme-next   use-motion ">
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -21,12 +32,38 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.3" color="#222">
+
+
+
 
 
   <meta name="keywords" content="ssh,centos,linux," />
@@ -35,156 +72,167 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="踩坑道人" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="alternate" href="/atom.xml" title="Keel" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:
-
-“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”
-
-实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
+<meta name="description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:  “verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”  实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
+<meta name="keywords" content="ssh,centos,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在CentOS6中升级openSSH到6.7版">
 <meta property="og:url" content="https://keel.github.io/2015/update-openssh-6/index.html">
-<meta property="og:site_name" content="踩坑道人">
-<meta property="og:description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:
-
-“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”
-
-实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
+<meta property="og:site_name" content="Keel">
+<meta property="og:description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:  “verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”  实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://keel.github.io/images/openssh_sshd_config.jpg">
 <meta property="og:updated_time" content="2015-11-08T16:14:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在CentOS6中升级openSSH到6.7版">
-<meta name="twitter:description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:
-
-“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”
-
-实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
+<meta name="twitter:description" content="缘起机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:  “verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”  实际上通过yum是无法直接升级到6.6以后版本的(CentOS7好像可以直接升级到更高版本),而rpm包能成功安装的最新版本也只是6.6p1版本,唯一的办法只能通过编译安装">
 <meta name="twitter:image" content="https://keel.github.io/images/openssh_sshd_config.jpg">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
-<script type="text/javascript">
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?650ffedfcce0201ccead16b386e82c1b";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
-  <title> 在CentOS6中升级openSSH到6.7版 | 踩坑道人 </title>
+
+
+  <link rel="canonical" href="https://keel.github.io/2015/update-openssh-6/"/>
+
+
+
+
+
+  <title>在CentOS6中升级openSSH到6.7版 | Keel</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
+  
+  
+    
   
 
-
-
-
-
-
-  <div class="container one-column page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">踩坑道人</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Keel</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
         </li>
       
-
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
       
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
       
     </ul>
   
@@ -192,54 +240,83 @@ var _hmt = _hmt || [];
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://keel.github.io/2015/update-openssh-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keel">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keel">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                在CentOS6中升级openSSH到6.7版
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">在CentOS6中升级openSSH到6.7版</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-08T09:16:21+08:00" content="2015-11-08">
-              2015-11-08
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-08T09:16:21+08:00">
+                2015-11-08
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/linux/" itemprop="url" rel="index">
                     <span itemprop="name">linux</span>
                   </a>
@@ -247,20 +324,19 @@ var _hmt = _hmt || [];
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/update-openssh-6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/update-openssh-6/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+          
+
+          
+          
+
+          
+
           
 
           
@@ -269,14 +345,16 @@ var _hmt = _hmt || [];
       </header>
     
 
-
-    <div class="post-body">
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
+        <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>机房的例行漏洞扫描显示openSSH6.6及以下版本存在以下漏洞:</p>
 <blockquote>
 <p>“verify_host_key函数 SSHFP DNS RR 检查绕过漏洞(CVE-2014-2653),建议升级OpenSSH至6.6之后版本.”</p>
 </blockquote>
@@ -284,36 +362,49 @@ var _hmt = _hmt || [];
 <p>经过三四天的折腾,成功完成了20几台服务器的升级,在此记录下:</p>
 <a id="more"></a>
 <h1 id="使用yum安装需要的telnet服务以及编译openssh需要的库"><a href="#使用yum安装需要的telnet服务以及编译openssh需要的库" class="headerlink" title="使用yum安装需要的telnet服务以及编译openssh需要的库"></a>使用yum安装需要的telnet服务以及编译openssh需要的库</h1><p>登录后先跳转root权限,执行以下命令:</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> sshUpdate &amp;&amp; <span class="keyword">cd</span> sshUpdate \</span><br><span class="line">&amp;&amp; yum install -<span class="keyword">y</span> xinetd telnet-server <span class="keyword">make</span> <span class="keyword">perl</span> pam pam-devel zlib zlib-devel openssl-devel \</span><br><span class="line">&amp;&amp; yum install -<span class="keyword">y</span> gcc* \</span><br><span class="line">&amp;&amp; <span class="keyword">vim</span> /etc/xinetd.d/telnet</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd ~</div><div class="line">mkdir sshUpdate &amp;&amp; cd sshUpdate \</div><div class="line">&amp;&amp; yum install -y xinetd telnet-server make perl pam pam-devel zlib zlib-devel openssl-devel \</div><div class="line">&amp;&amp; yum install -y gcc* \</div><div class="line">&amp;&amp; vim /etc/xinetd.d/telnet</div></pre></td></tr></table></figure>
 <p>在这里将/etc/xinetd.d/telnet(这里telnet文件名也有可能为krb5-telnet) 中的disable=yes改为no,保存退出.</p>
-<h1 id="启动telnet服务"><a href="#启动telnet服务" class="headerlink" title="启动telnet服务"></a>启动telnet服务</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/xinetd restart &amp;&amp; vim /</span>etc<span class="regexp">/sysconfig/i</span>ptables</span><br></pre></td></tr></table></figure>
+<h1 id="启动telnet服务"><a href="#启动telnet服务" class="headerlink" title="启动telnet服务"></a>启动telnet服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/xinetd restart &amp;&amp; vim /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
 <p>启动telnet服务并编辑iptables打开23端口,也就是telnet端口,打开后重启iptables</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service iptables <span class="built_in">restart</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service iptables restart</div></pre></td></tr></table></figure>
 <p>此时,应该可以另开一个terminal使用telnet <ip>方式尝试登录服务器了,如果有问题,需要检查上述步骤是否有误,特别要注意23端口除了iptables限制外,还有没有上层的路由或者云主机的管理系统没有打开.</ip></p>
 <h1 id="下载并编译安装openssh6-7p1"><a href="#下载并编译安装openssh6-7p1" class="headerlink" title="下载并编译安装openssh6.7p1"></a>下载并编译安装openssh6.7p1</h1><p>这里推荐先用yum update openssl将openssl升级,至少是1.0.1版本.<br>执行以下命令:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~<span class="regexp">/sshUpdate \</span><br><span class="line">&amp;&amp; wget http:/</span><span class="regexp">/ftp.openbsd.org/</span>pub<span class="regexp">/OpenBSD/</span>OpenSSH<span class="regexp">/portable/</span>openssh-<span class="number">6.7</span>p1.tar.gz &amp;&amp; mv <span class="regexp">/etc/</span>ssh <span class="regexp">/etc/</span>ssh.bak \</span><br><span class="line">&amp;&amp; rpm -e `rpm -qa | <span class="keyword">grep</span> openssh` --nodeps \</span><br><span class="line">&amp;&amp; tar zxf openssh-<span class="number">6.7</span>p1.tar.gz &amp;&amp; cd openssh-<span class="number">6.7</span>p1 \</span><br><span class="line">&amp;&amp; .<span class="regexp">/configure --prefix=/u</span>sr --sysconfdir=<span class="regexp">/etc/</span>ssh --with-pam --with-zlib --with-md5-passwords \</span><br><span class="line">&amp;&amp; make &amp;&amp; make install \</span><br><span class="line">&amp;&amp; ssh -V</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd ~/sshUpdate \</div><div class="line">&amp;&amp; wget http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-6.7p1.tar.gz &amp;&amp; mv /etc/ssh /etc/ssh.bak \</div><div class="line">&amp;&amp; rpm -e `rpm -qa | grep openssh` --nodeps \</div><div class="line">&amp;&amp; tar zxf openssh-6.7p1.tar.gz &amp;&amp; cd openssh-6.7p1 \</div><div class="line">&amp;&amp; ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-pam --with-zlib --with-md5-passwords \</div><div class="line">&amp;&amp; make &amp;&amp; make install \</div><div class="line">&amp;&amp; ssh -V</div></pre></td></tr></table></figure>
 <p>以上指令会先下载6.7的源码,然后备份ssh并卸载当前的openssh,随后将源码进行编译,这里如果执行出错,请检查第一步的相关依赖包没有通过yum安装完整,如果没有,建议更换yum源,比如用阿里的源.<br>最后一句会显示当前ssh的版本号,如果成功显示openSSH6.7p1,那基本上算是接近成功了.</p>
-<h1 id="启用ssh服务"><a href="#启用ssh服务" class="headerlink" title="启用ssh服务"></a>启用ssh服务</h1><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp contrib<span class="regexp">/redhat/</span>sshd.init <span class="regexp">/etc/i</span>nit.d<span class="regexp">/sshd &amp;&amp; chkconfig --add sshd \</span><br><span class="line">&amp;&amp; service sshd start &amp;&amp; vim /</span>etc<span class="regexp">/ssh/</span>sshd_config</span><br></pre></td></tr></table></figure>
+<h1 id="启用ssh服务"><a href="#启用ssh服务" class="headerlink" title="启用ssh服务"></a>启用ssh服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp contrib/redhat/sshd.init /etc/init.d/sshd &amp;&amp; chkconfig --add sshd \</div><div class="line">&amp;&amp; service sshd start &amp;&amp; vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
 <p>这里将ssh服务做成开机启动并启动了sshd,打开sshd_config后,如果需要连接xshell4,则按下图进行以下修改:<br><img src="/images/openssh_sshd_config.jpg" alt="sshd"><br>保存退出后,重启sshd并查一下sshd服务是否是自启动状态:</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart &amp;&amp; chkconfig <span class="comment">--list sshd</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service sshd restart &amp;&amp; chkconfig --list sshd</div></pre></td></tr></table></figure>
 <h1 id="关闭telnet"><a href="#关闭telnet" class="headerlink" title="关闭telnet"></a>关闭telnet</h1><p>停止telnet服务,并修改配置:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/xinetd stop &amp;&amp; vi /</span>etc<span class="regexp">/xinetd.d/</span>telnet</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/xinetd stop &amp;&amp; vi /etc/xinetd.d/telnet</div></pre></td></tr></table></figure>
 <p>将之前改过的disable=yes又改回去成no.<br>随后再将修改iptables将23端口关闭,并重启iptables服务.<br>至此,可以再开ssh登录,用ssh -V查看版本号.</p>
-</span>
+
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/ssh/" rel="tag">#ssh</a>
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
-            <a href="/tags/centos/" rel="tag">#centos</a>
+            <a href="/tags/centos/" rel="tag"># centos</a>
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -325,6 +416,8 @@ var _hmt = _hmt || [];
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -339,6 +432,10 @@ var _hmt = _hmt || [];
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -349,25 +446,19 @@ var _hmt = _hmt || [];
   </div>
 
 
+          </div>
+          
+
+
+          
+
+  
+
+
+
         </div>
-
         
-
-
-        
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2015/update-openssh-6/"
-           data-title="在CentOS6中升级openSSH到6.7版" data-url="https://keel.github.io/2015/update-openssh-6/">
-      </div>
-    
-  </div>
-
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -378,345 +469,308 @@ var _hmt = _hmt || [];
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="Keel" itemprop="image"/>
-          <p class="site-author-name" itemprop="name">Keel</p>
-        </div>
-        <p class="site-description motion-element" itemprop="description"></p>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Keel" />
+            
+              <p class="site-author-name" itemprop="name">Keel</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
+          <nav class="site-state motion-element">
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
 
-        </nav>
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
 
-        <div class="links-of-author motion-element">
+          </nav>
+
           
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
-        </div>
 
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘起"><span class="nav-number">1.</span> <span class="nav-text">缘起</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用yum安装需要的telnet服务以及编译openssh需要的库"><span class="nav-number">2.</span> <span class="nav-text">使用yum安装需要的telnet服务以及编译openssh需要的库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动telnet服务"><span class="nav-number">3.</span> <span class="nav-text">启动telnet服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载并编译安装openssh6-7p1"><span class="nav-number">4.</span> <span class="nav-text">下载并编译安装openssh6.7p1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用ssh服务"><span class="nav-number">5.</span> <span class="nav-text">启用ssh服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关闭telnet"><span class="nav-number">6.</span> <span class="nav-text">关闭telnet</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Keel</span>
-</div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
+  
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
   
 
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"keel"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
-        }
-      }
-    };
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
 
   
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
   
 
 </body>
